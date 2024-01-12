@@ -1,0 +1,21 @@
+{
+  "Model": [
+    {
+      "model": {
+        "name": "Mod1"
+      },
+      "items": {
+        "manufacturing": "color",
+        "agriculture": "grey",
+        "livestock": "color",
+        "domestic": "grey"
+      },
+      "text": {
+        "manufacturing sector": "(0, 0, 0)",
+		"agriculture sector": "(105, 105, 105)",
+		"livestock sector": "(0, 0, 0)",
+		"domestic sector": "(105, 105, 105)"
+      }
+	}
+  ]
+}
