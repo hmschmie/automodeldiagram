@@ -5,16 +5,16 @@
         "name": "Mod1"
       },
       "items": {
-        "manufacturing": "color",
-        "agriculture": "grey",
-        "livestock": "color",
-        "domestic": "grey"
+        "manufacturing": true,
+        "agriculture": false,
+        "livestock": true,
+        "domestic": false
       },
       "text": {
-        "manufacturing sector": "(0, 0, 0)",
-		"agriculture sector": "(105, 105, 105)",
-		"livestock sector": "(0, 0, 0)",
-		"domestic sector": "(105, 105, 105)"
+        "Manufacturing sector": "black",
+		"Agriculture sector": "grey",
+		"Livestock sector": "black",
+		"Domestic sector": "grey"
       }
 	}
   ]

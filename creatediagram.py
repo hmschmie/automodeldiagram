@@ -12,18 +12,18 @@ posit = {
 
 # positions of the textual items for the water use sectors
 postxt = {
-    "manufacturing sector": (3990, 1330),
-    "agriculture sector": (4950, 1370),
-    "livestock sector": (5600, 1420),
-    "domestic sector": (6200, 1460)
+    "Manufacturing sector": (3990, 1330),
+    "Agriculture sector": (4950, 1370),
+    "Livestock sector": (5600, 1420),
+    "Domestic sector": (6200, 1460)
 }
 
 # define if text should be wrapped or not
 textwrp = {
-    "manufacturing sector": True,
-    "agriculture sector": True,
-    "livestock sector": True,
-    "domestic sector": True
+    "Manufacturing sector": True,
+    "Agriculture sector": True,
+    "Livestock sector": True,
+    "Domestic sector": True
 }
 
 
@@ -38,14 +38,13 @@ def paste_images(moddict, txtdict, positdict, postxtdict, postxtdictwrap, modnam
     :param modname: name of the model(s)
     :return: a stored png of the model with modname as file name
     """
-    background = Image.open('./fig_background/background.png', 'r')
+    background = Image.open('fig_background/background_main.png', 'r')
     for key in moddict:
-        img = Image.open('./fig_wateruse/' + key + '_' + moddict[key] + '.png', 'r')
+        img = Image.open('./fig_items/' + key + '_' + str(moddict[key]) + '.png', 'r')
         offset = positdict[key]
         background.paste(img, offset, img)
     imgtxt = ImageDraw.Draw(background)
-    #font is not provided in repository due to avoid licensing issues.
-    myFont = ImageFont.truetype('segoeui.ttf', size=50)
+    myFont = ImageFont.truetype('Roboto-Medium.ttf', size=50)
     for key, value in txtdict.items():
         txtpos = postxtdict[key]
         txtwrp = postxtdictwrap[key]
@@ -54,20 +53,18 @@ def paste_images(moddict, txtdict, positdict, postxtdict, postxtdictwrap, modnam
             y_text = txtpos[1]
             for line in lines:
                 x0, y0, x1, y1 = myFont.getbbox(line)
-                imgtxt.text(((txtpos[0] - (x1 - x0)) / 2, y_text), line, font=myFont, size=50, fill=make_tuple(value))
+                imgtxt.text(((txtpos[0] - (x1 - x0)) / 2, y_text), line, font=myFont, size=50, fill=value)
                 y_text += (y1 - y0)
         else:
-            imgtxt.text(txtpos, key, font=myFont, fill=(255, 0, 0))
+            imgtxt.text(txtpos, key, font=myFont, size=50, fill=value)
 
     background.save(modname + '.png')
 
-
 # read in the setup for the model(s)
-#mod = open('modelsetup.json', 'r')
 mod = open('modelsetup.json', 'r')
-data = json.load(mod)
+config = json.load(mod)
 # iterate over the models and call the function to create the diagram
-for model in data["Model"]:
+for model in config["Model"]:
     mod = model['items']
     txt = model['text']
     modname = model['model']['name']
