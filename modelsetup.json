@@ -2,19 +2,68 @@
   "Model": [
     {
       "model": {
-        "name": "Mod1"
+        "name": "Mod1_true"
       },
       "items": {
         "manufacturing": true,
-        "agriculture": false,
+        "irrigation": true,
         "livestock": true,
-        "domestic": false
+        "domestic": true,
+        "electricity": true,
+        "runoff": true,
+        "reservoir": true,
+        "lake": true,
+        "river": true,
+        "wetland": true,
+        "wateruse_arrow": true,
+        "discharge": true
       },
       "text": {
         "Manufacturing sector": "black",
-		"Agriculture sector": "grey",
+		"Irrigation sector": "black",
 		"Livestock sector": "black",
-		"Domestic sector": "grey"
+		"Domestic sector": "black",
+        "Electricity sector": "black",
+        "Water consumption": "blue",
+        "Reservoir storage": "blue",
+        "Dam": "black",
+        "Lake storage": "blue",
+        "River storage": "blue",
+        "Wetland storage": "blue",
+        "River discharge": "blue"
+      }
+	},
+    {
+      "model": {
+        "name": "Mod1_false"
+      },
+      "items": {
+        "manufacturing": false,
+        "irrigation": false,
+        "livestock": false,
+        "domestic": false,
+        "electricity": false,
+        "runoff": false,
+        "reservoir": false,
+        "lake": false,
+        "river": false,
+        "wetland": false,
+        "wateruse_arrow": false,
+        "discharge": false
+      },
+      "text": {
+        "Manufacturing sector": "grey",
+		"Irrigation sector": "grey",
+		"Livestock sector": "grey",
+		"Domestic sector": "grey",
+        "Electricity sector": "grey",
+        "Water consumption": "grey",
+        "Reservoir storage": "grey",
+        "Dam": "grey",
+        "Lake storage": "grey",
+        "River storage": "grey",
+        "Wetland storage": "grey",
+        "River discharge": "grey"
       }
 	}
   ]
