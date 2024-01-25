@@ -9,6 +9,7 @@ posit = {
     "livestock": (2480, 1510),
     "domestic": (2910, 1570),
     "ar_wateruse": (1690, 390),
+    "groundwater_background": (-7, 1629),
     "reservoir": (1605, 785),
     "lake": (2085, 901),
     "river": (2637, 1074),
@@ -79,6 +80,7 @@ postxt = {
     "Snow sublimation": (1200, 530),
     "Glacier sublimation": (2500, 280),
     "Groundwater recharge": (1600, 2020),
+    "A_groundwater_background": (1, 2265),
     "Throughfall": (80, 1330),
     "Infiltration": (105, 1580),
     "Glacier runoff": (1350, 600),
@@ -151,7 +153,9 @@ posita = {
     "A_ar_snow_sublim": (1420, 1050),
     "A_ar_glacier_sublim": (1560, 1070),
     "A_glacier": (1020, 1475),
+    "A_glacier_background": (850, 1220),
     "A_groundwater": (700, 2550),
+    "A_groundwater_background": (-5, 2271),
     "A_snow": (1020, 1280),
     "A_soil": (700, 2090)
 }
@@ -175,6 +179,8 @@ postxta = {
     "Throughfall": (200, 1410),
     "Glacier runoff": (1230, 1710),
     "Total runoff": (4200, 2220),
+    "Groundwater runoff": (3300, 2360),
+    "Interflow": (1600, 1970),
     "Snow melt": (900, 1710),
     "Snow storage": (1090, 1220),
     "Surface runoff": (1560, 1710),
@@ -205,6 +211,8 @@ textwrpa = {
     "Throughfall": False,
     "Glacier runoff": False,
     "Total runoff": True,
+    "Groundwater runoff": True,
+    "Interflow": False,
     "Snow melt": False,
     "Snow storage": False,
     "Surface runoff": False,
@@ -236,18 +244,25 @@ def paste_images(moddict, txtdict, modadict, positdict, postxtdict, postxtdictwr
     myFont = ImageFont.truetype('Roboto-Medium.ttf', 50)
     myFonts = ImageFont.truetype('Roboto-Medium.ttf', 35)
     myFontl = ImageFont.truetype('Roboto-Medium.ttf', 80)
-    myFonth = ImageFont.truetype('Roboto-Medium.ttf', 120)
+    myFonth = ImageFont.truetype('Roboto-Medium.ttf', 100)
     background = Image.open('fig_background/background_main.png', 'r')
     background.paste(Image.open('./fig_items/input_background.png'), (20, 20),
                      Image.open('./fig_items/input_background.png'))
+    print(modname)
     for key in moddict:
-        print(key)
+        if key == "groundwater_background" and str(moddict[key]) == "True":
+            background.paste(Image.open('./fig_items/all_line.png'), (970, 775), Image.open('./fig_items/all_line.png'))
+            continue
         img = Image.open('./fig_items/' + key + '_' + str(moddict[key]) + '.png', 'r')
         offset = positdict[key]
         background.paste(img, offset, img)
+        if key == "groundwater_background":
+            background.paste(Image.open('./fig_items/all_line.png'), (970, 775), Image.open('./fig_items/all_line.png'))
         background.paste(Image.open('./fig_items/legend.png'),  (50, 2620), Image.open('./fig_items/legend.png'))
         imgtxt = ImageDraw.Draw(background)
         imgtxt.text((3400, 100), modname, font=myFonth, fill="black")
+        if modname == "JULES-W1":
+            imgtxt.text((3750, 1300), "CaMa Flood", font=myFont, fill="black")
     for key, value in txtdict.items():
         txtpos = postxtdict[key]
         txtwrp = postxtdictwrap[key]
@@ -278,12 +293,13 @@ def paste_images(moddict, txtdict, modadict, positdict, postxtdict, postxtdictwr
     background.paste(Image.open('./fig_items/input_background.png'), (20, 150),
                      Image.open('./fig_items/input_background.png'))
     for key in modadict:
-        print(key)
+        if key == "A_groundwater_background" and str(modadict[key]) == "True":
+            continue
         img = Image.open('./fig_items/' + key + '_' + str(modadict[key]) + '.png', 'r')
         offset = positadict[key]
         background.paste(img, offset, img)
         imgtxt = ImageDraw.Draw(background)
-        imgtxt.text((1530, 50), modname, font=myFonth, fill="black")
+        imgtxt.text((1200, 50), modname, font=myFonth, fill="black")
     for key, value in txtadict.items():
         txtpos = postxtadict[key]
         txtwrp = postxtadictwrap[key]
@@ -310,7 +326,7 @@ def paste_images(moddict, txtdict, modadict, positdict, postxtdict, postxtdictwr
     for key, value in layadict.items():
         txtpos = layatxtpos[key]
         if int(value) > 0:
-            imgtxt.text(txtpos, value, font=myFont, fill='#0062FF')
+            imgtxt.text(txtpos, value, font=myFont, fill='#0445A2')
         else:
             imgtxt.text(txtpos, value, font=myFont, fill='#929497')
 
