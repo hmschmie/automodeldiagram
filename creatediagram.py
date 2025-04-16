@@ -366,7 +366,7 @@ def paste_images(moddict, txtdict, modadict, positdict, postxtdict, postxtdictwr
         # in case groundwater is not represented
         if key == "groundwater_background":
             background.paste(Image.open('./fig_items/all_line.png'), (970, 775), Image.open('./fig_items/all_line.png'))
-        background.paste(Image.open('./fig_items/legend.png'),  (50, 2620), Image.open('./fig_items/legend.png'))
+        background.paste(Image.open('./fig_items/legend_upd.png'),  (50, 2620), Image.open('./fig_items/legend_upd.png'))
         imgtxt = ImageDraw.Draw(background)
         # add specific text if model is the "standard model"
         if modname == "ISIMIP2b-complete":
